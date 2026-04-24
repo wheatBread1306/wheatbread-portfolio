@@ -10,7 +10,9 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap"
+    rel="stylesheet">
 
   <link rel="stylesheet" href="../../css/style.css">
 </head>
@@ -37,19 +39,77 @@
   </header>
 
   <main>
-    <section style="min-height: 100vh; display: flex; align-items: center;">
-      <div class="container">
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+      <canvas id="waveCanvas" class="wave-canvas"></canvas>
+      <div class="container hero-content">
         <span class="hero-greeting tl" data-ja="プロジェクトページ" data-en="Project Page">Project Page</span>
-        <h1 class="tl" data-ja="BrickBreakerVST のページです" data-en="This is page for BrickBreakerVST">This is page for BrickBreakerVST</h1>
+        <h1 class="tl" data-ja="BrickBreakerVST" data-en="BrickBreakerVST">BrickBreakerVST</h1>
         <p class="tl" style="color: var(--text-muted); margin-top: 1.5rem; font-size: 1.125rem;"
-          data-ja="このページは仮実装です。近日中に詳細を公開予定です。"
-          data-en="This page is a placeholder. Full project details coming soon.">
-          This page is a placeholder. Full project details coming soon.
+          data-ja="MIDIキーボードのピッチベンドで操作する、ブロック崩しゲームVSTプラグイン。JUCEを利用し、オーディオ処理とUI描画間のロックフリー同期を実現。"
+          data-en="A Breakout-style game implemented as a VST3 audio plugin, controlled via MIDI Pitch Wheel. Features lock-free thread synchronization.">
+          A Breakout-style game implemented as a VST3 audio plugin, controlled via MIDI Pitch Wheel. Features lock-free
+          thread synchronization.
         </p>
-        <div style="margin-top: 2rem;">
-          <a href="../../index.html#works" class="btn btn-outline tl" style="display:inline-flex;"
-            data-ja="← ワークスへ戻る" data-en="← Back to Works">← Back to Works</a>
+        <div style="margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+          <a href="../../index.html#works" class="btn tl" data-ja="← ワークスへ戻る" data-en="← Back to Works">← Back to
+            Works</a>
+          <a href="https://github.com/wheatBread1306/BrickBreakerVST" target="_blank" rel="noopener noreferrer"
+            class="btn btn-outline">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+              <path
+                d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+            </svg>
+            GitHub
+          </a>
+          <a href="https://github.com/wheatBread1306/BrickBreakerVST/releases" target="_blank" rel="noopener noreferrer"
+            class="btn btn-outline">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+              <path d="M14 3h7v7h-2V6.41l-8.29 8.3-1.42-1.42L17.59 5H14V3zM5 5h5v2H5v12h12v-5h2v7H3V3h9v2H5v14z" />
+            </svg>
+            <span class="tl" data-ja="ダウンロード" data-en="Download">Download</span>
+          </a>
         </div>
+      </div>
+    </section>
+
+    <!-- Project Details Section -->
+    <section id="details" style="padding: 4rem 0;">
+      <div class="container" style="max-width: 800px; margin: 0 auto; line-height: 1.8; color: var(--text-muted);">
+        <img src="../../assets/BrickBreakerVST.png" alt="BrickBreakerVST"
+          style="max-width: 80%; width: 100%; display: block; margin: 0 auto 2rem; border-radius: 12px;">
+        <h2 class="tl" data-ja="プロジェクト概要" data-en="Project Overview"
+          style="color: var(--text-main); margin-bottom: 1rem;">Project Overview</h2>
+        <p class="tl"
+          data-ja="このプロジェクトはJUCEフレームワークを使用して開発されたVST3プラグインです。MIDIキーボードのピッチベンドホイールを使用して、パドルを操作するブロック崩しゲームをDAW上でプレイすることができます。"
+          data-en="This project is a VST3 plugin developed using the JUCE framework. It allows you to play a Breakout-style game directly within your DAW, controlling the paddle using the pitch bend wheel on a MIDI keyboard."
+          style="margin-bottom: 1.5rem;">This project is a VST3 plugin developed using the JUCE framework. It allows you
+          to play a Breakout-style game directly within your DAW, controlling the paddle using the pitch bend wheel on a
+          MIDI keyboard.</p>
+
+        <h3 class="tl" data-ja="開発のきっかけ" data-en="Background"
+          style="color: var(--text-main); margin-bottom: 0.5rem; margin-top: 1.5rem; font-size: 1.25rem;">Background
+        </h3>
+        <p class="tl"
+          data-ja="MIDIキーボードを買ったもののあまり活用できておらず、何か面白い使い道はないかと考えた結果、このプラグインを作成しました。ちなみに、ブロック崩しゲーム自体は、以前大学の授業でProcessingを用いて作成した経験がありました。"
+          data-en="I bought a MIDI keyboard but wasn't using it much, so I started this project looking for an interesting way to utilize it. Incidentally, I had previously created a Breakout-style game using Processing in a university class."
+          style="margin-bottom: 1.5rem;">I bought a MIDI keyboard but wasn't using it much, so I started this project
+          looking for an interesting way to utilize it. Incidentally, I had previously created a Breakout-style game
+          using Processing in a university class.</p>
+
+        <h3 class="tl" data-ja="技術的な挑戦" data-en="Technical Challenges"
+          style="color: var(--text-main); margin-bottom: 0.5rem; margin-top: 1.5rem; font-size: 1.25rem;">Technical
+          Challenges</h3>
+        <p class="tl"
+          data-ja="開発の初期版ではオーディオ処理スレッドである processBlock 内で juce::ScopedLock を記述していましたが、オーディオ処理をブロックしてしまう危険性に気づき、std::atomic と std::shared_ptr を用いてロックフリーな設計に書き換えました。"
+          data-en="In the early versions, I used juce::ScopedLock within the processBlock, which handles audio processing. However, realizing the danger of blocking audio processing, I rewrote the implementation to be lock-free using std::atomic and std::shared_ptr."
+          style="margin-bottom: 1.5rem;">In the early versions, I used juce::ScopedLock within the processBlock, which
+          handles audio processing. However, realizing the danger of blocking audio processing, I rewrote the
+          implementation to be lock-free using std::atomic and std::shared_ptr.</p>
+        <p class="tl" data-ja="また、C++の「名前空間 (namespace)」という概念を理解するのにも非常に苦労しました。"
+          data-en="Additionally, I struggled significantly to understand the concept of 'namespaces' in C++."
+          style="margin-bottom: 1.5rem;">Additionally, I struggled significantly to understand the concept of
+          'namespaces' in C++.</p>
       </div>
     </section>
   </main>

@@ -10,7 +10,9 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap"
+    rel="stylesheet">
 
   <link rel="stylesheet" href="../../css/style.css">
 </head>
@@ -37,19 +39,138 @@
   </header>
 
   <main>
-    <section style="min-height: 100vh; display: flex; align-items: center;">
-      <div class="container">
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+      <canvas id="waveCanvas" class="wave-canvas"></canvas>
+      <div class="container hero-content">
         <span class="hero-greeting tl" data-ja="プロジェクトページ" data-en="Project Page">Project Page</span>
-        <h1 class="tl" data-ja="Cathode Drift. のページです" data-en="This is page for Cathode Drift.">This is page for Cathode Drift.</h1>
+        <h1 class="tl" data-ja="Cathode Drift." data-en="Cathode Drift.">Cathode Drift.</h1>
         <p class="tl" style="color: var(--text-muted); margin-top: 1.5rem; font-size: 1.125rem;"
-          data-ja="このページは仮実装です。近日中に詳細を公開予定です。"
-          data-en="This page is a placeholder. Full project details coming soon.">
-          This page is a placeholder. Full project details coming soon.
+          data-ja="左右のチャンネルに独立したDCオフセットを適用したディストーションプラグイン。"
+          data-en="A custom distortion plugin that applies independent DC offsets to the left and right channels, processing the signal through a clipper.">
+          A custom distortion plugin that applies independent DC offsets to the left and right channels, processing the
+          signal through a clipper.
         </p>
-        <div style="margin-top: 2rem;">
-          <a href="../../index.html#works" class="btn btn-outline tl" style="display:inline-flex;"
-            data-ja="← ワークスへ戻る" data-en="← Back to Works">← Back to Works</a>
+        <div style="margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+          <a href="../../index.html#works" class="btn tl" data-ja="← ワークスへ戻る" data-en="← Back to Works">← Back to
+            Works</a>
+          <a href="https://wheatbread.gumroad.com/l/cathode_drift" target="_blank" rel="noopener noreferrer"
+            class="btn btn-outline">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <path d="M16 10a4 4 0 0 1-8 0"></path>
+            </svg>
+            Gumroad
+          </a>
         </div>
+      </div>
+    </section>
+
+    <!-- Project Details Section -->
+    <section id="details" style="padding: 4rem 0;">
+      <div class="container" style="max-width: 800px; margin: 0 auto; line-height: 1.8; color: var(--text-muted);">
+        <img src="../../assets/Cathode_Drift.png" alt="Cathode Drift."
+          style="max-width: 80%; width: 100%; display: block; margin: 0 auto 2rem; border-radius: 12px;">
+        <h2 class="tl" data-ja="プロジェクト概要" data-en="Project Overview"
+          style="color: var(--text-main); margin-bottom: 1rem;">Project Overview</h2>
+        <p class="tl" data-ja="Cathode Drift. は、左右のチャンネルに対してそれぞれ異なるDCオフセットを追加し、信号をクリッパーに通すことで独特な歪みを生み出すディストーションプラグインです。"
+          data-en="Cathode Drift. is a distortion plugin that generates a unique crunch by adding independent DC offsets to the left and right channels and passing the signal through a clipper."
+          style="margin-bottom: 1.5rem;">Cathode Drift. is a distortion plugin that generates a unique crunch by adding
+          independent DC offsets to the left and right channels and passing the signal through a clipper.</p>
+        <p class="tl" data-ja="シンプルながらもアグレッシブなサウンドメイキングに最適で、ステレオイメージに予測不可能な変化をもたらします。"
+          data-en="It's perfect for simple yet aggressive sound design, bringing unpredictable variations to the stereo image."
+          style="margin-bottom: 1.5rem;">It's perfect for simple yet aggressive sound design, bringing unpredictable
+          variations to the stereo image.</p>
+
+        <h3 class="tl" data-ja="開発のきっかけ" data-en="Background"
+          style="color: var(--text-main); margin-bottom: 0.5rem; margin-top: 1.5rem; font-size: 1.25rem;">Background
+        </h3>
+        <p class="tl"
+          data-ja="L/Rで逆方向のDCオフセットをかけてステレオを広げる手法を手軽に使いたいと考えたのがきっかけです。既存の安価なプラグインではL/RのDCオフセットを個別に設定できず、FLStudio付属のPatcherでフリーウェアを組み合わせようとしたところクラッシュしてしまったため、自作することにしました。また、同様の機能を持つ高価なプラグインはアナログ風メーターで視認性が低く、DCカット用HPFも40Hzまでしか対応していなかったため、デジタルメーターと5Hzからのカットオフ選択を実装しました。"
+          data-en="This plugin started from a desire to easily apply opposing DC offsets to the L/R channels as a way to widen the stereo image. Affordable plugins didn't allow independent L/R DC offset control, and attempts to combine freeware tools in FLStudio's Patcher resulted in crashes, which led me to build my own. Existing high-end options with similar functionality had analog-style meters that were hard to read, and their DC-cut HPFs only reached down to 40Hz—so I implemented digital metering and a cutoff selection starting from 5Hz."
+          style="margin-bottom: 1.5rem;">This plugin started from a desire to easily apply opposing DC offsets to the
+          L/R channels as a way to widen the stereo image. Affordable plugins didn't allow independent L/R DC offset
+          control, and attempts to combine freeware tools in FLStudio's Patcher resulted in crashes, which led me to
+          build my own. Existing high-end options with similar functionality had analog-style meters that were hard to
+          read, and their DC-cut HPFs only reached down to 40Hz—so I implemented digital metering and a cutoff
+          selection starting from 5Hz.</p>
+
+        <h3 class="tl" data-ja="技術的な挑戦" data-en="Technical Challenges"
+          style="color: var(--text-main); margin-bottom: 0.5rem; margin-top: 1.5rem; font-size: 1.25rem;">Technical
+          Challenges</h3>
+
+        <h4 class="tl" data-ja="1. パッチ読み込み時のパラメータリンク処理の競合回避"
+          data-en="1. Avoiding Parameter Linking Conflicts During Patch Loading"
+          style="color: var(--text-main); margin-bottom: 0.5rem; margin-top: 1rem; font-size: 1.1rem;">1. Avoiding
+          Parameter Linking Conflicts During Patch Loading</h4>
+        <p class="tl"
+          data-ja="左右のパラメータを連動させる「リンクモード」を実装した結果、パッチ（プリセット）読み込み時に問題が発生しました。読み込み途中で片方のノブの値が更新された瞬間、リンク機能が意図せず発動してしまい、もう片方の正しい設定値が上書きされてしまうという挙動でした。"
+          data-en="Implementing a 'link mode' to synchronize left and right parameters caused an issue during patch (preset) loading. When one knob's value updated during loading, the link function unintentionally triggered, overwriting the correct setting of the other knob."
+          style="margin-bottom: 0.5rem;">Implementing a 'link mode' to synchronize left and right parameters caused an
+          issue during patch (preset) loading. When one knob's value updated during loading, the link function
+          unintentionally triggered, overwriting the correct setting of the other knob.</p>
+        <p class="tl"
+          data-ja="パッチデータをロードする一連の処理中のみ、パラメータのリンク処理を一時的にバイパス（停止）する内部フラグを実装しました。これにより、連動機能の利便性を保ちつつ、正確な状態復元を両立させました。"
+          data-en="I implemented an internal flag to temporarily bypass (disable) the parameter linking process exclusively during the patch data loading sequence. This successfully balanced the convenience of the link function with accurate state restoration."
+          style="margin-bottom: 1.5rem;">I implemented an internal flag to temporarily bypass (disable) the parameter
+          linking process exclusively during the patch data loading sequence. This successfully balanced the convenience
+          of the link function with accurate state restoration.</p>
+
+        <h4 class="tl" data-ja="2. Projucerでのバイナリデータ組み込み（XMLパース問題）の解消"
+          data-en="2. Resolving Binary Data Embedding Issues in Projucer (XML Parsing Problem)"
+          style="color: var(--text-main); margin-bottom: 0.5rem; margin-top: 1rem; font-size: 1.1rem;">2. Resolving
+          Binary Data Embedding Issues in Projucer (XML Parsing Problem)</h4>
+        <p class="tl"
+          data-ja="getStateInformation 関数を用いて生成したプリセットのXMLファイルを、Projucerの「BinaryData」として組み込もうとした際に読み込みエラーが発生しました。本来は長いデータであるはずが、ファイル内の終端文字（またはそれに準ずる文字）の影響でテキストデータとして誤認・パースされ、最初の数文字で読み込みが打ち切られてしまう現象でした。"
+          data-en="When attempting to embed the preset XML file generated by the getStateInformation function as 'BinaryData' in Projucer, a loading error occurred. The file, despite being long data, was mistakenly recognized and parsed as text data due to an end-of-file character (or similar) within it, causing the loading to abort after the first few characters."
+          style="margin-bottom: 0.5rem;">When attempting to embed the preset XML file generated by the
+          getStateInformation function as 'BinaryData' in Projucer, a loading error occurred. The file, despite being
+          long data, was mistakenly recognized and parsed as text data due to an end-of-file character (or similar)
+          within it, causing the loading to abort after the first few characters.</p>
+        <p class="tl"
+          data-ja="プリセットファイルの拡張子を .xml からバイナリデータとして認識されるもの（.dat や .bin など）へ変更しました。これによりProjucer側でのテキストとしての解釈を回避し、データを欠損なく完全なバイナリとしてアプリに組み込むことに成功しました。"
+          data-en="I changed the extension of the preset file from .xml to a format recognized as binary data (such as .dat or .bin). This prevented Projucer from interpreting it as text and allowed the data to be successfully embedded into the app as complete binary without any loss."
+          style="margin-bottom: 1.5rem;">I changed the extension of the preset file from .xml to a format recognized as
+          binary data (such as .dat or .bin). This prevented Projucer from interpreting it as text and allowed the data
+          to be successfully embedded into the app as complete binary without any loss.</p>
+
+        <h4 class="tl" data-ja="3. Info画面表示時のGUIスレッド停止（フリーズ）の解消"
+          data-en="3. Resolving GUI Thread Freezing When Displaying the Info Screen"
+          style="color: var(--text-main); margin-bottom: 0.5rem; margin-top: 1rem; font-size: 1.1rem;">3. Resolving GUI
+          Thread Freezing When Displaying the Info Screen</h4>
+        <p class="tl"
+          data-ja="プラグインの「Info（情報）」ボタンを押した際、初期実装ではJUCE標準のAlertWindow（アラートポップアップ）を使用していました。しかし、OSネイティブのウィンドウ生成に伴うリアルタイムなメモリ確保（new/delete）が原因で、呼び出し時にGUIスレッドが1秒ほどブロックしてしまい、操作感が著しく損なわれていました。"
+          data-en="The initial implementation used JUCE's standard AlertWindow (alert popup) when the plugin's 'Info' button was pressed. However, the real-time memory allocation (new/delete) associated with OS-native window creation caused the GUI thread to block for about a second upon invocation, significantly degrading the user experience."
+          style="margin-bottom: 0.5rem;">The initial implementation used JUCE's standard AlertWindow (alert popup) when
+          the plugin's 'Info' button was pressed. However, the real-time memory allocation (new/delete) associated with
+          OS-native window creation caused the GUI thread to block for about a second upon invocation, significantly
+          degrading the user experience.</p>
+        <p class="tl"
+          data-ja="ポップアップウィンドウをその都度生成する方式を廃止しました。代わりに、プラグインの画面内にあらかじめInfo用の Component を描画・配置しておき、ボタンのクリックに応じて setVisible(bool) で表示・非表示を切り替えるだけの方式に変更しました。結果としてスレッドのブロックが解消され、スムーズなUIレスポンスを実現しました。"
+          data-en="I discarded the approach of generating a popup window each time. Instead, I changed to a method where a Component for the Info screen is drawn and placed within the plugin's interface in advance, and its visibility is simply toggled using setVisible(bool) in response to button clicks. As a result, the thread blocking was eliminated, achieving smooth UI responsiveness."
+          style="margin-bottom: 1.5rem;">I discarded the approach of generating a popup window each time. Instead, I
+          changed to a method where a Component for the Info screen is drawn and placed within the plugin's interface in
+          advance, and its visibility is simply toggled using setVisible(bool) in response to button clicks. As a
+          result, the thread blocking was eliminated, achieving smooth UI responsiveness.</p>
+
+        <h4 class="tl" data-ja="4. CPU・コンパイラフレンドリーなDSPループの最適化"
+          data-en="4. Optimizing for a CPU/Compiler-Friendly DSP Loop"
+          style="color: var(--text-main); margin-bottom: 0.5rem; margin-top: 1rem; font-size: 1.1rem;">4. Optimizing for
+          a CPU/Compiler-Friendly DSP Loop</h4>
+        <p class="tl" data-ja="オーディオ信号を処理する最深部のサンプルごとのループ（processBlock内のループ等）において、極力 if 文などの条件分岐を排除したコード設計を徹底しました。"
+          data-en="In the deepest, per-sample loop processing the audio signal (such as the loop within processBlock), I thoroughly designed the code to eliminate conditional branches like 'if' statements as much as possible."
+          style="margin-bottom: 0.5rem;">In the deepest, per-sample loop processing the audio signal (such as the loop
+          within processBlock), I thoroughly designed the code to eliminate conditional branches like 'if' statements as
+          much as possible.</p>
+        <p class="tl"
+          data-ja="CPUのパイプライン処理における「分岐予測のミス（ペナルティ）」を防ぐとともに、コンパイラによる最適化（自動ベクタライズなど）が最大限に効きやすい状態を作りました。結果として、重い処理が含まれるオーディオプラグインでも安定して動作する低負荷なDSP処理を実現しました。"
+          data-en="This prevented 'branch prediction misses (penalties)' in the CPU pipeline processing and created a state where compiler optimizations (such as auto-vectorization) could be maximally effective. As a result, I achieved low-load DSP processing that runs stably even in an audio plugin containing heavy processing."
+          style="margin-bottom: 1.5rem;">This prevented 'branch prediction misses (penalties)' in the CPU pipeline
+          processing and created a state where compiler optimizations (such as auto-vectorization) could be maximally
+          effective. As a result, I achieved low-load DSP processing that runs stably even in an audio plugin containing
+          heavy processing.</p>
       </div>
     </section>
   </main>
