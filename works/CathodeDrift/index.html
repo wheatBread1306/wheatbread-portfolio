@@ -42,16 +42,34 @@
       <canvas id="waveCanvas" class="wave-canvas"></canvas>
       <div class="container hero-content">
         <span class="hero-greeting tl" data-ja="プロジェクトページ" data-en="Project Page">Project Page</span>
-        <h1 class="tl" data-ja="Cathode Drift. のページです" data-en="This is page for Cathode Drift.">This is page for Cathode Drift.</h1>
+        <h1 class="tl" data-ja="Cathode Drift." data-en="Cathode Drift.">Cathode Drift.</h1>
         <p class="tl" style="color: var(--text-muted); margin-top: 1.5rem; font-size: 1.125rem;"
-          data-ja="このページは仮実装です。近日中に詳細を公開予定です。"
-          data-en="This page is a placeholder. Full project details coming soon.">
-          This page is a placeholder. Full project details coming soon.
+          data-ja="左右のチャンネルに独立したDCオフセットを適用したディストーションプラグイン。"
+          data-en="A custom distortion plugin that applies independent DC offsets to the left and right channels, processing the signal through a clipper.">
+          A custom distortion plugin that applies independent DC offsets to the left and right channels, processing the signal through a clipper.
         </p>
-        <div style="margin-top: 2rem;">
-          <a href="../../index.html#works" class="btn btn-outline tl" style="display:inline-flex;"
+        <div style="margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+          <a href="../../index.html#works" class="btn tl"
             data-ja="← ワークスへ戻る" data-en="← Back to Works">← Back to Works</a>
+          <a href="https://wheatbread.gumroad.com/l/cathode_drift" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <path d="M16 10a4 4 0 0 1-8 0"></path>
+            </svg>
+            Gumroad
+          </a>
         </div>
+      </div>
+    </section>
+
+    <!-- Project Details Section -->
+    <section id="details" style="padding: 4rem 0;">
+      <div class="container" style="max-width: 800px; margin: 0 auto; line-height: 1.8; color: var(--text-muted);">
+        <img src="../../assets/Cathode_Drift.png" alt="Cathode Drift." style="width: 100%; border-radius: 12px; margin-bottom: 2rem;">
+        <h2 class="tl" data-ja="プロジェクト概要" data-en="Project Overview" style="color: var(--text-main); margin-bottom: 1rem;">Project Overview</h2>
+        <p class="tl" data-ja="Cathode Drift. は、左右のチャンネルに対してそれぞれ異なるDCオフセットを追加し、信号をクリッパーに通すことで独特な歪みを生み出すディストーションプラグインです。" data-en="Cathode Drift. is a distortion plugin that generates a unique crunch by adding independent DC offsets to the left and right channels and passing the signal through a clipper." style="margin-bottom: 1.5rem;">Cathode Drift. is a distortion plugin that generates a unique crunch by adding independent DC offsets to the left and right channels and passing the signal through a clipper.</p>
+        <p class="tl" data-ja="シンプルながらもアグレッシブなサウンドメイキングに最適で、ステレオイメージに予測不可能な変化をもたらします。" data-en="It's perfect for simple yet aggressive sound design, bringing unpredictable variations to the stereo image." style="margin-bottom: 1.5rem;">It's perfect for simple yet aggressive sound design, bringing unpredictable variations to the stereo image.</p>
       </div>
     </section>
   </main>
