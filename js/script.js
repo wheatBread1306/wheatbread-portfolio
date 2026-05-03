@@ -1,9 +1,6 @@
-let currentLang = 'en';
+let currentLang = localStorage.getItem('selectedLanguage') || 'en';
 
-function toggleLanguage() {
-  // Switch language state
-  currentLang = currentLang === 'ja' ? 'en' : 'ja';
-  
+function applyLanguage() {
   // Update document lang attribute
   document.documentElement.lang = currentLang;
   
@@ -19,13 +16,23 @@ function toggleLanguage() {
   const jaEl = document.getElementById('lang-ja');
   const enEl = document.getElementById('lang-en');
   
-  if(currentLang === 'ja') {
-    jaEl.classList.add('active');
-    enEl.classList.remove('active');
-  } else {
-    jaEl.classList.remove('active');
-    enEl.classList.add('active');
+  if(jaEl && enEl) {
+    if(currentLang === 'ja') {
+      jaEl.classList.add('active');
+      enEl.classList.remove('active');
+    } else {
+      jaEl.classList.remove('active');
+      enEl.classList.add('active');
+    }
   }
+}
+
+function toggleLanguage() {
+  // Switch language state
+  currentLang = currentLang === 'ja' ? 'en' : 'ja';
+  localStorage.setItem('selectedLanguage', currentLang);
+  
+  applyLanguage();
 }
 
 // Wave Background Animation
@@ -111,4 +118,7 @@ function initWaveAnimation() {
   animate();
 }
 
-document.addEventListener('DOMContentLoaded', initWaveAnimation);
+document.addEventListener('DOMContentLoaded', () => {
+  applyLanguage();
+  initWaveAnimation();
+});
