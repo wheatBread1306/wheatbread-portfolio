@@ -44,17 +44,88 @@
             <canvas id="waveCanvas" class="wave-canvas"></canvas>
             <div class="container hero-content">
                 <span class="hero-greeting tl" data-ja="プロジェクトページ" data-en="Project Page">Project Page</span>
-                <h1 class="tl" data-ja="DeckFilter のページです" data-en="This is page for DeckFilter">This is page for
-                    DeckFilter</h1>
+                <h1 class="tl" data-ja="DeckFilter." data-en="DeckFilter.">DeckFilter.</h1>
                 <p class="tl" style="color: var(--text-muted); margin-top: 1.5rem; font-size: 1.125rem;"
-                    data-ja="このページは仮実装です。近日中に詳細を公開予定です。"
-                    data-en="This page is a placeholder. Full project details coming soon.">
-                    This page is a placeholder. Full project details coming soon.
+                    data-ja="DJコントローラーの操作感にインスパイアされた、シンプルで直感的なフィルタープラグイン。"
+                    data-en="A simple and intuitive filter plugin inspired by the feel of a DJ controller.">
+                    A simple and intuitive filter plugin inspired by the feel of a DJ controller.
                 </p>
-                <div style="margin-top: 2rem;">
-                    <a href="../../index.html#works" class="btn btn-outline tl" style="display:inline-flex;"
-                        data-ja="← ワークスへ戻る" data-en="← Back to Works">← Back to Works</a>
+                <div style="margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <a href="../../index.html#works" class="btn tl" data-ja="← ワークスへ戻る" data-en="← Back to Works">← Back to Works</a>
+                    <a href="https://wheatbread.gumroad.com/l/deck_filter" target="_blank" rel="noopener noreferrer"
+                        class="btn btn-outline">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                            <line x1="3" y1="6" x2="21" y2="6"></line>
+                            <path d="M16 10a4 4 0 0 1-8 0"></path>
+                        </svg>
+                        Gumroad
+                    </a>
                 </div>
+            </div>
+        </section>
+
+        <!-- Project Details Section -->
+        <section id="details" style="padding: 4rem 0;">
+            <div class="container" style="max-width: 800px; margin: 0 auto; line-height: 1.8; color: var(--text-muted);">
+                <img src="../../assets/Just%20turn%20the%20knob.png" alt="DeckFilter."
+                    style="max-width: 50%; width: 100%; display: block; margin: 0 auto 2rem; border-radius: 12px;">
+                <h2 class="tl" data-ja="プロジェクト概要" data-en="Project Overview"
+                    style="color: var(--text-main); margin-bottom: 1rem;">Project Overview</h2>
+                <p class="tl" data-ja="DeckFilter は、DJコントローラーに搭載されているフィルターの挙動を模したプラグインです。1つの大きなノブを回すだけで、直感的かつダイナミックなフィルタリング効果を得ることができます。"
+                    data-en="DeckFilter is a plugin that emulates the behavior of filters found on DJ controllers. By turning a single large knob, you can achieve intuitive and dynamic filtering effects."
+                    style="margin-bottom: 1.5rem;">DeckFilter is a plugin that emulates the behavior of filters found on DJ controllers. By turning a single large knob, you can achieve intuitive and dynamic filtering effects.</p>
+
+                <h3 class="tl" data-ja="開発のきっかけ" data-en="Background"
+                    style="color: var(--text-main); margin-bottom: 0.5rem; margin-top: 1.5rem; font-size: 1.25rem;">Background</h3>
+                <p class="tl"
+                    data-ja="既存のDJフィルタープラグインの一部で、操作時にCPUのスパイク（負荷の急増）が発生するという声を耳にしたことが開発の第一の理由です。"
+                    data-en="The primary reason for development was hearing reports that some existing DJ filter plugins caused CPU spikes during operation."
+                    style="margin-bottom: 0.5rem;">The primary reason for development was hearing reports that some existing DJ filter plugins caused CPU spikes during operation.</p>
+                <p class="tl"
+                    data-ja="また、画面中央に巨大なノブを1つ配置した、非常にシンプルで大胆なデザインのプラグインを自分自身で作ってみたいという興味もあり、制作をスタートしました。"
+                    data-en="Additionally, I was interested in creating a plugin with a very simple and bold design, featuring just one massive knob in the center of the screen, which motivated me to start this project."
+                    style="margin-bottom: 1.5rem;">Additionally, I was interested in creating a plugin with a very simple and bold design, featuring just one massive knob in the center of the screen, which motivated me to start this project.</p>
+
+                <h3 class="tl" data-ja="技術的な挑戦" data-en="Technical Challenges"
+                    style="color: var(--text-main); margin-bottom: 0.5rem; margin-top: 1.5rem; font-size: 1.25rem;">Technical Challenges</h3>
+
+                <h4 class="tl" data-ja="1. 自然なフィルター挙動の再現"
+                    data-en="1. Reproducing Natural Filter Behavior"
+                    style="color: var(--text-main); margin-bottom: 0.5rem; margin-top: 1rem; font-size: 1.1rem;">1. Reproducing Natural Filter Behavior</h4>
+                <p class="tl"
+                    data-ja="DJコントローラーのフィルターを模するため、Frequency（カットオフ周波数）ノブの操作に合わせて内部で自動的にQ値（レゾナンス）が変化する仕組みを実装しました。"
+                    data-en="To emulate a DJ controller's filter, I implemented a mechanism where the Q-value (resonance) changes automatically internally in tandem with the operation of the Frequency (cutoff) knob."
+                    style="margin-bottom: 0.5rem;">To emulate a DJ controller's filter, I implemented a mechanism where the Q-value (resonance) changes automatically internally in tandem with the operation of the Frequency (cutoff) knob.</p>
+                <p class="tl"
+                    data-ja="しかし、単に数値を連動させるだけでは音楽的で自然な変化にならず、聴感上心地よい「自然な設定値（カーブ）」を探り当てるための微調整に非常に苦労しました。"
+                    data-en="However, simply linking the values didn't result in a musical and natural variation. It took a lot of struggle and fine-tuning to find the 'natural settings (curve)' that felt pleasing to the ear."
+                    style="margin-bottom: 1.5rem;">However, simply linking the values didn't result in a musical and natural variation. It took a lot of struggle and fine-tuning to find the 'natural settings (curve)' that felt pleasing to the ear.</p>
+
+                <h4 class="tl" data-ja="2. 巨大なノブのUIデザイン"
+                    data-en="2. UI Design of the Giant Knob"
+                    style="color: var(--text-main); margin-bottom: 0.5rem; margin-top: 1rem; font-size: 1.1rem;">2. UI Design of the Giant Knob</h4>
+                <p class="tl"
+                    data-ja="直感的な操作性を強調するため、画面中央に非常に巨大なノブを配置するレイアウトを採用しました。"
+                    data-en="To emphasize intuitive operability, I adopted a layout that places a massive knob right in the center of the screen."
+                    style="margin-bottom: 0.5rem;">To emphasize intuitive operability, I adopted a layout that places a massive knob right in the center of the screen.</p>
+                <p class="tl"
+                    data-ja="これほど大きく表示してもグラフィックとして間延びせず、違和感のないデザインに仕上げるため、質感や影の落とし方などの細部の調整に苦心しました。"
+                    data-en="It was a challenge to adjust the details, such as textures and drop shadows, to create a design that didn't look overly stretched or unnatural even when displayed at such a large size."
+                    style="margin-bottom: 1.5rem;">It was a challenge to adjust the details, such as textures and drop shadows, to create a design that didn't look overly stretched or unnatural even when displayed at such a large size.</p>
+
+                <h4 class="tl" data-ja="3. 機能性と見た目を両立させるメーター配置"
+                    data-en="3. Meter Placement Balancing Functionality and Aesthetics"
+                    style="color: var(--text-main); margin-bottom: 0.5rem; margin-top: 1rem; font-size: 1.1rem;">3. Meter Placement Balancing Functionality and Aesthetics</h4>
+                <p class="tl"
+                    data-ja="Colorノブとロゴセクションの間に、不自然な空白スペースが生まれてしまいました。"
+                    data-en="An unnatural empty space was created between the Color knob and the logo section."
+                    style="margin-bottom: 0.5rem;">An unnatural empty space was created between the Color knob and the logo section.</p>
+                <p class="tl"
+                    data-ja="そこで、このデッドスペースにオーディオメーターを搭載することで、プラグインとしての機能性を向上させつつ、全体的な見た目のバランスを自然に整えるという工夫を凝らしました。"
+                    data-en="To solve this, I added audio meters in these dead spaces. This ingenuity not only improved the functionality of the plugin but also naturally balanced the overall visual appearance."
+                    style="margin-bottom: 1.5rem;">To solve this, I added audio meters in these dead spaces. This ingenuity not only improved the functionality of the plugin but also naturally balanced the overall visual appearance.</p>
             </div>
         </section>
     </main>
