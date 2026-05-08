@@ -190,6 +190,35 @@ section {
   letter-spacing: -0.03em;
 }
 
+.title-underline {
+  color: var(--text-main);
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.title-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background: var(--accent);
+  transition: width 0.3s ease;
+  border-radius: 2px;
+}
+
+.title-underline:hover {
+  color: var(--accent);
+}
+
+.title-underline:hover::after {
+  width: 100%;
+}
+
 .hero p {
   color: var(--text-muted);
   font-size: 1.125rem;
