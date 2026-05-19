@@ -103,7 +103,7 @@ def build_post_html(meta, body_html, slug):
     </div>
   </header>
 
-  <main class="blog-post-main">
+    <main class="blog-post-main" style="padding-top: 6rem;">
     <div class="container blog-container">
 
       <a href="/blog/" class="blog-back tl" data-ja="← ブログ一覧" data-en="← Back to Blog">← Back to Blog</a>
