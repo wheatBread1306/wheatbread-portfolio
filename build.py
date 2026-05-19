@@ -74,12 +74,12 @@ def build_post_html(meta, body_html, slug):
   <meta property="og:title"       content="{title_en}">
   <meta property="og:description" content="{desc_en}">
   <meta property="og:url"         content="{SITE_URL}/blog/{slug}/">
-  <link rel="icon" type="image/jpeg" href="../../assets/ICON.jpg">
+  <link rel="icon" type="image/jpeg" href="/assets/ICON.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../../css/style.css">
-  <link rel="stylesheet" href="../../css/blog.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/blog.css">
 </head>
 <body>
 
@@ -90,10 +90,10 @@ def build_post_html(meta, body_html, slug):
         <a href="../../" class="logo">wheatBread1306.</a>
         <div class="nav-group">
           <div class="nav-links">
-            <a href="../../#about" class="tl" data-ja="アバウト" data-en="About">About</a>
-            <a href="../../#tech"  class="tl" data-ja="技術"     data-en="Tech">Tech</a>
-            <a href="../../#works" class="tl" data-ja="ワークス" data-en="Works">Works</a>
-            <a href="../../blog/"  class="tl" data-ja="ブログ"   data-en="Blog">Blog</a>
+            <a href="/#about" class="tl" data-ja="アバウト" data-en="About">About</a>
+            <a href="/#tech"  class="tl" data-ja="技術"     data-en="Tech">Tech</a>
+            <a href="/#works" class="tl" data-ja="ワークス" data-en="Works">Works</a>
+            <a href="/blog/"  class="tl" data-ja="ブログ"   data-en="Blog">Blog</a>
           </div>
           <button class="lang-toggle" onclick="toggleLanguage()" aria-label="Toggle language">
             <span id="lang-ja">JA</span><span>/</span><span id="lang-en" class="active">EN</span>
@@ -106,7 +106,7 @@ def build_post_html(meta, body_html, slug):
   <main class="blog-post-main">
     <div class="container blog-container">
 
-      <a href="../../blog/" class="blog-back tl" data-ja="← ブログ一覧" data-en="← Back to Blog">← Back to Blog</a>
+      <a href="/blog/" class="blog-back tl" data-ja="← ブログ一覧" data-en="← Back to Blog">← Back to Blog</a>
 
       <article>
         <header class="post-header">
@@ -131,7 +131,7 @@ def build_post_html(meta, body_html, slug):
     </div>
   </footer>
 
-  <script src="../../js/script.js"></script>
+  <script src="/js/script.js"></script>
 </body>
 </html>
 """
