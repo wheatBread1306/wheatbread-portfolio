@@ -193,7 +193,7 @@ def build_index_html(posts):
     </div>
   </header>
 
-  <main>
+  <main style="padding-top: 6rem;">
     <div class="container">
       <h1 class="section-title tl" data-ja="ブログ" data-en="Blog">Blog</h1>
       <div class="post-list">
