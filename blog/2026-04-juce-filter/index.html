@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title class="tl" data-ja="JUCEでバイクアッドフィルターを実装する | wheatBread1306" data-en="Implementing a Biquad Filter in JUCE | wheatBread1306">Implementing a Biquad Filter in JUCE | wheatBread1306</title>
+  <meta name="description" content="A walkthrough of biquad filter theory and implementation in JUCE, with real code examples.">
+  <meta property="og:title"       content="Implementing a Biquad Filter in JUCE">
+  <meta property="og:description" content="A walkthrough of biquad filter theory and implementation in JUCE, with real code examples.">
+  <meta property="og:url"         content="https://wheatbread.dev/blog/2026-04-juce-filter/">
+  <link rel="icon" type="image/jpeg" href="../../assets/ICON.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="../../css/blog.css">
+</head>
+<body>
+
+  <!-- Navigation（既存と同じ構造） -->
+  <header>
+    <div class="container">
+      <nav>
+        <a href="../../" class="logo">wheatBread1306.</a>
+        <div class="nav-group">
+          <div class="nav-links">
+            <a href="../../#about" class="tl" data-ja="アバウト" data-en="About">About</a>
+            <a href="../../#tech"  class="tl" data-ja="技術"     data-en="Tech">Tech</a>
+            <a href="../../#works" class="tl" data-ja="ワークス" data-en="Works">Works</a>
+            <a href="../../blog/"  class="tl" data-ja="ブログ"   data-en="Blog">Blog</a>
+          </div>
+          <button class="lang-toggle" onclick="toggleLanguage()" aria-label="Toggle language">
+            <span id="lang-ja">JA</span><span>/</span><span id="lang-en" class="active">EN</span>
+          </button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="blog-post-main">
+    <div class="container blog-container">
+
+      <a href="../../blog/" class="blog-back tl" data-ja="← ブログ一覧" data-en="← Back to Blog">← Back to Blog</a>
+
+      <article>
+        <header class="post-header">
+          <div class="post-meta">
+            <time datetime="2026-04-01">2026-04-01</time>
+            <div class="post-tags"><span class="blog-tag">JUCE</span><span class="blog-tag">C++</span><span class="blog-tag">DSP</span></div>
+          </div>
+          <h1 class="post-title tl" data-ja="JUCEでバイクアッドフィルターを実装する" data-en="Implementing a Biquad Filter in JUCE">Implementing a Biquad Filter in JUCE</h1>
+        </header>
+
+        <div class="post-body">
+          <h2 id="はしめに">はじめに</h2>
+
+<p>バイクアッドフィルターはDSPの基礎中の基礎ですが、JUCEで実装するときに少し迷ったのでまとめます。</p>
+
+<h2 id="基本的なコート">基本的なコード</h2>
+
+<pre><code>float processSample(float input)
+{
+    float output = b0 * input + b1 * x1 + b2 * x2
+                              - a1 * y1 - a2 * y2;
+    x2 = x1; x1 = input;
+    y2 = y1; y1 = output;
+    return output;
+}
+</code></pre>
+
+<h2 id="係数の計算">係数の計算</h2>
+
+<p>ローパスフィルターの場合、カットオフ周波数 <code>fc</code> とサンプルレート <code>fs</code> から係数を計算します。</p>
+
+<pre><code>void setLowPass(float fc, float fs, float Q)
+{
+    float w0 = 2.0f * MathConstants&lt;float&gt;::pi * fc / fs;
+    float alpha = std::sin(w0) / (2.0f * Q);
+
+    b0 =  (1.0f - std::cos(w0)) / 2.0f;
+    b1 =   1.0f - std::cos(w0);
+    b2 =  (1.0f - std::cos(w0)) / 2.0f;
+    float a0 =  1.0f + alpha;
+    a1 = -2.0f * std::cos(w0);
+    a2 =  1.0f - alpha;
+
+    // a0で正規化
+    b0 /= a0; b1 /= a0; b2 /= a0;
+    a1 /= a0; a2 /= a0;
+}
+</code></pre>
+
+<h2 id="まとめ">まとめ</h2>
+
+<p>JUCEには <code>dsp::IIR::Filter</code> という組み込みクラスもありますが、自前実装の方が挙動を把握しやすいです。</p>
+
+        </div>
+      </article>
+
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 wheatBread1306. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="../../js/script.js"></script>
+</body>
+</html>
