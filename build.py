@@ -103,19 +103,19 @@ def build_post_html(meta, body_html, slug):
     </div>
   </header>
 
-    <main class="blog-post-main" style="padding-top: 12rem;">
+    <main class="blog-post-main">
     <div class="container blog-container">
 
       <a href="../../blog/" class="blog-back tl" data-ja="← ブログ一覧" data-en="← Back to Blog">← Back to Blog</a>
 
       <article>
-        <header class="post-header">
+        <div class="post-header">
           <div class="post-meta">
             <time datetime="{date}">{date}</time>
             <div class="post-tags">{tag_badges}</div>
           </div>
           <h1 class="post-title tl" data-ja="{title}" data-en="{title_en}">{title_en}</h1>
-        </header>
+        </div>
 
         <div class="post-body">
           {body_html}
