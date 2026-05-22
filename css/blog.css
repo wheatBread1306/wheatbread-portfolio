@@ -129,7 +129,7 @@
 }
 
 .post-body img {
-  max-width: min(100%, 640px);
+  max-width: min(100%, 500px);
   height: auto;
   display: block;
   margin: 1.5rem auto;
