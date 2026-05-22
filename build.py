@@ -103,19 +103,19 @@ def build_post_html(meta, body_html, slug):
     </div>
   </header>
 
-  <main class="blog-post-main">
+    <main class="blog-post-main">
     <div class="container blog-container">
 
       <a href="../../blog/" class="blog-back tl" data-ja="← ブログ一覧" data-en="← Back to Blog">← Back to Blog</a>
 
       <article>
-        <header class="post-header">
+        <div class="post-header">
           <div class="post-meta">
             <time datetime="{date}">{date}</time>
             <div class="post-tags">{tag_badges}</div>
           </div>
           <h1 class="post-title tl" data-ja="{title}" data-en="{title_en}">{title_en}</h1>
-        </header>
+        </div>
 
         <div class="post-body">
           {body_html}
@@ -131,7 +131,7 @@ def build_post_html(meta, body_html, slug):
     </div>
   </footer>
 
-  <script src="../../js/script.js"></script>
+  <script src="/js/script.js"></script>
 </body>
 </html>
 """
@@ -193,7 +193,7 @@ def build_index_html(posts):
     </div>
   </header>
 
-  <main>
+  <main style="padding-top: 6rem;">
     <div class="container">
       <h1 class="section-title tl" data-ja="ブログ" data-en="Blog">Blog</h1>
       <div class="post-list">
@@ -241,7 +241,7 @@ def main():
         # Markdown → HTML（コードブロック対応）
         body_html = markdown2.markdown(
             body_md,
-            extras=["fenced-code-blocks", "header-ids"]
+            extras=["fenced-code-blocks", "header-ids", "tables", "break-on-newline", "code-friendly"]
         )
 
         # 記事ページを出力

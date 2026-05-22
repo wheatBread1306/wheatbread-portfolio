@@ -74,7 +74,7 @@
 /* ── 記事詳細ページ ─────────────────────────── */
 
 .blog-post-main {
-  padding: 2rem 0 4rem;
+  padding: 6rem 0 4rem;
 }
 
 .blog-container {
@@ -126,6 +126,13 @@
   font-size: 0.95rem;
   line-height: 1.85;
   color: var(--text-primary, #f0f0f0);
+}
+
+.post-body img {
+  max-width: min(100%, 560px);
+  height: auto;
+  display: block;
+  margin: 1.5rem auto;
 }
 
 .post-body h2 {
@@ -201,4 +208,20 @@
   .blog-container {
     padding: 0 1rem;
   }
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th,
+td {
+  border: 1px solid var(--border-color);
+  padding: 8px 12px;
+  text-align: left;
+}
+
+th {
+  background-color: #333;
 }
