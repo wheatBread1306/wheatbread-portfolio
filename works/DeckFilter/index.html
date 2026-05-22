@@ -25,14 +25,21 @@
             <nav>
                 <a href="../../index.html" class="logo">wheatBread1306.</a>
                 <div class="nav-group">
-                    <div class="nav-links">
-                        <a href="../../index.html#about" class="tl" data-ja="アバウト" data-en="About">About</a>
-                        <a href="../../index.html#tech" class="tl" data-ja="技術" data-en="Tech">Tech</a>
-                        <a href="../../index.html#works" class="tl" data-ja="ワークス" data-en="Works">Works</a>
-                    </div>
-                    <button class="lang-toggle" onclick="toggleLanguage()" aria-label="Toggle language">
-                        <span id="lang-ja">JA</span><span>/</span><span id="lang-en" class="active">EN</span>
+                    <button class="menu-toggle" type="button" aria-label="Toggle menu" aria-controls="nav-menu" aria-expanded="false">
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                        <span class="bar"></span>
                     </button>
+                    <div class="nav-menu" id="nav-menu">
+                        <div class="nav-links">
+                            <a href="../../index.html#about" class="tl" data-ja="アバウト" data-en="About">About</a>
+                            <a href="../../index.html#tech" class="tl" data-ja="技術" data-en="Tech">Tech</a>
+                            <a href="../../index.html#works" class="tl" data-ja="ワークス" data-en="Works">Works</a>
+                        </div>
+                        <button class="lang-toggle" onclick="toggleLanguage()" aria-label="Toggle language">
+                            <span id="lang-ja">JA</span><span>/</span><span id="lang-en" class="active">EN</span>
+                        </button>
+                    </div>
                 </div>
             </nav>
         </div>
