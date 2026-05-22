@@ -35,6 +35,46 @@ function toggleLanguage() {
   applyLanguage();
 }
 
+function initMobileMenu() {
+  const menuToggle = document.querySelector('.menu-toggle');
+  const navMenu = document.querySelector('.nav-menu');
+
+  if (!menuToggle || !navMenu) {
+    return;
+  }
+
+  const closeMenu = () => {
+    navMenu.classList.remove('open');
+    menuToggle.setAttribute('aria-expanded', 'false');
+  };
+
+  menuToggle.addEventListener('click', (event) => {
+    event.stopPropagation();
+    const isOpen = navMenu.classList.toggle('open');
+    menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  });
+
+  navMenu.addEventListener('click', (event) => {
+    const target = event.target;
+    const clickedLink = target instanceof Element && target.closest('a');
+    if (clickedLink && window.matchMedia('(max-width: 768px)').matches) {
+      closeMenu();
+    }
+  });
+
+  document.addEventListener('click', (event) => {
+    if (!navMenu.contains(event.target) && !menuToggle.contains(event.target)) {
+      closeMenu();
+    }
+  });
+
+  window.addEventListener('resize', () => {
+    if (!window.matchMedia('(max-width: 768px)').matches) {
+      closeMenu();
+    }
+  });
+}
+
 // Wave Background Animation
 class Wave {
   constructor(canvas, color, speed, amplitude, frequency, yOffset, strokeColor = null, lineWidth = 0) {
@@ -120,5 +160,6 @@ function initWaveAnimation() {
 
 document.addEventListener('DOMContentLoaded', () => {
   applyLanguage();
+  initMobileMenu();
   initWaveAnimation();
 });
