@@ -241,7 +241,7 @@ def main():
         # Markdown → HTML（コードブロック対応）
         body_html = markdown2.markdown(
             body_md,
-            extras=["fenced-code-blocks", "header-ids"]
+            extras=["fenced-code-blocks", "header-ids", "tables", "break-on-newline", "code-friendly"]
         )
 
         # 記事ページを出力
