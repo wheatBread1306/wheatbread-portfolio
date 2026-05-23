@@ -3,8 +3,8 @@ title: プラグイン制作者にとってFL Studioが最適な理由
 title_en: Why FLStudio is the Best DAW for Plugin Developers
 date: 2026-05-21
 tags: Image-Line, FLStudio, VST
-description: なぜFLStudioはプラグイン制作者にとって最適なのでしょうか？その理由を解説します。
-description_en: Why FLStudio is the best DAW for plugin developers? Let me explain the reasons.
+description: FLStudioがプラグイン制作にとって最適な主張
+description_en: The claim that FL Studio is ideal for plugin development.
 ---
 
 ## はじめに
