@@ -87,35 +87,42 @@ def build_post_html(meta, body_html, slug):
   <header>
     <div class="container">
       <nav>
-        <a href="../../" class="logo">wheatBread1306.</a>
+        <a href="#" class="logo">wheatBread1306.</a>
         <div class="nav-group">
-          <div class="nav-links">
-            <a href="../../#about" class="tl" data-ja="アバウト" data-en="About">About</a>
-            <a href="../../#tech"  class="tl" data-ja="技術"     data-en="Tech">Tech</a>
-            <a href="../../#works" class="tl" data-ja="ワークス" data-en="Works">Works</a>
-            <a href="../../blog/"  class="tl" data-ja="ブログ"   data-en="Blog">Blog</a>
-          </div>
-          <button class="lang-toggle" onclick="toggleLanguage()" aria-label="Toggle language">
-            <span id="lang-ja">JA</span><span>/</span><span id="lang-en" class="active">EN</span>
+          <button class="menu-toggle" type="button" aria-label="Toggle menu" aria-controls="nav-menu" aria-expanded="false">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
           </button>
+          <div class="nav-menu" id="nav-menu">
+            <div class="nav-links">
+              <a href="#about" class="tl" data-ja="アバウト" data-en="About">About</a>
+              <a href="#tech" class="tl" data-ja="技術" data-en="Tech">Tech</a>
+              <a href="#works" class="tl" data-ja="ワークス" data-en="Works">Works</a>
+              <a href="blog/" class="tl" data-ja="ブログ" data-en="Blog">Blog</a>
+            </div>
+            <button class="lang-toggle" onclick="toggleLanguage()" aria-label="Toggle language">
+              <span id="lang-ja">JA</span><span>/</span><span id="lang-en" class="active">EN</span>
+            </button>
+          </div>
         </div>
       </nav>
     </div>
   </header>
 
-  <main class="blog-post-main">
+    <main class="blog-post-main">
     <div class="container blog-container">
 
       <a href="../../blog/" class="blog-back tl" data-ja="← ブログ一覧" data-en="← Back to Blog">← Back to Blog</a>
 
       <article>
-        <header class="post-header">
+        <div class="post-header">
           <div class="post-meta">
             <time datetime="{date}">{date}</time>
             <div class="post-tags">{tag_badges}</div>
           </div>
           <h1 class="post-title tl" data-ja="{title}" data-en="{title_en}">{title_en}</h1>
-        </header>
+        </div>
 
         <div class="post-body">
           {body_html}
@@ -131,7 +138,7 @@ def build_post_html(meta, body_html, slug):
     </div>
   </footer>
 
-  <script src="../../js/script.js"></script>
+  <script src="/js/script.js"></script>
 </body>
 </html>
 """
@@ -177,23 +184,30 @@ def build_index_html(posts):
   <header>
     <div class="container">
       <nav>
-        <a href="../" class="logo">wheatBread1306.</a>
+        <a href="#" class="logo">wheatBread1306.</a>
         <div class="nav-group">
-          <div class="nav-links">
-            <a href="../#about" class="tl" data-ja="アバウト" data-en="About">About</a>
-            <a href="../#tech"  class="tl" data-ja="技術"     data-en="Tech">Tech</a>
-            <a href="../#works" class="tl" data-ja="ワークス" data-en="Works">Works</a>
-            <a href="../blog/"  class="tl" data-ja="ブログ"   data-en="Blog">Blog</a>
-          </div>
-          <button class="lang-toggle" onclick="toggleLanguage()" aria-label="Toggle language">
-            <span id="lang-ja">JA</span><span>/</span><span id="lang-en" class="active">EN</span>
+          <button class="menu-toggle" type="button" aria-label="Toggle menu" aria-controls="nav-menu" aria-expanded="false">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
           </button>
+          <div class="nav-menu" id="nav-menu">
+            <div class="nav-links">
+              <a href="#about" class="tl" data-ja="アバウト" data-en="About">About</a>
+              <a href="#tech" class="tl" data-ja="技術" data-en="Tech">Tech</a>
+              <a href="#works" class="tl" data-ja="ワークス" data-en="Works">Works</a>
+              <a href="blog/" class="tl" data-ja="ブログ" data-en="Blog">Blog</a>
+            </div>
+            <button class="lang-toggle" onclick="toggleLanguage()" aria-label="Toggle language">
+              <span id="lang-ja">JA</span><span>/</span><span id="lang-en" class="active">EN</span>
+            </button>
+          </div>
         </div>
       </nav>
     </div>
   </header>
 
-  <main>
+  <main style="padding-top: 6rem;">
     <div class="container">
       <h1 class="section-title tl" data-ja="ブログ" data-en="Blog">Blog</h1>
       <div class="post-list">
@@ -241,7 +255,7 @@ def main():
         # Markdown → HTML（コードブロック対応）
         body_html = markdown2.markdown(
             body_md,
-            extras=["fenced-code-blocks", "header-ids"]
+            extras=["fenced-code-blocks", "header-ids", "tables", "break-on-newline", "code-friendly"]
         )
 
         # 記事ページを出力
