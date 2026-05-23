@@ -21,6 +21,9 @@ The site focuses on a minimalist aesthetic with smooth interactions, featuring a
 - `css/style.css` - Custom styling and CSS variables for the dark theme.
 - `js/script.js` - Logic for the language toggle and the wave canvas animation.
 - `assets/` - Images, thumbnails, and the site favicon.
+- `build.py` - Python script for build blog article.
+- `posts/` - Raw blog article markdown.
+- `Blog/` - Built blog HTML.
 
 ## Author
 **wheatBread1306**
