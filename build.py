@@ -87,7 +87,7 @@ def build_post_html(meta, body_html, slug):
   <header>
     <div class="container">
       <nav>
-        <a href="#" class="logo">wheatBread1306.</a>
+        <a href="../../" class="logo">wheatBread1306.</a>
         <div class="nav-group">
           <button class="menu-toggle" type="button" aria-label="Toggle menu" aria-controls="nav-menu" aria-expanded="false">
             <span class="bar"></span>
@@ -96,10 +96,10 @@ def build_post_html(meta, body_html, slug):
           </button>
           <div class="nav-menu" id="nav-menu">
             <div class="nav-links">
-              <a href="#about" class="tl" data-ja="アバウト" data-en="About">About</a>
-              <a href="#tech" class="tl" data-ja="技術" data-en="Tech">Tech</a>
-              <a href="#works" class="tl" data-ja="ワークス" data-en="Works">Works</a>
-              <a href="blog/" class="tl" data-ja="ブログ" data-en="Blog">Blog</a>
+              <a href="../../#about" class="tl" data-ja="アバウト" data-en="About">About</a>
+              <a href="../../#tech" class="tl" data-ja="技術" data-en="Tech">Tech</a>
+              <a href="../../#works" class="tl" data-ja="ワークス" data-en="Works">Works</a>
+              <a href="../../blog/" class="tl" data-ja="ブログ" data-en="Blog">Blog</a>
             </div>
             <button class="lang-toggle" onclick="toggleLanguage()" aria-label="Toggle language">
               <span id="lang-ja">JA</span><span>/</span><span id="lang-en" class="active">EN</span>
@@ -184,7 +184,7 @@ def build_index_html(posts):
   <header>
     <div class="container">
       <nav>
-        <a href="#" class="logo">wheatBread1306.</a>
+        <a href="../" class="logo">wheatBread1306.</a>
         <div class="nav-group">
           <button class="menu-toggle" type="button" aria-label="Toggle menu" aria-controls="nav-menu" aria-expanded="false">
             <span class="bar"></span>
@@ -193,10 +193,10 @@ def build_index_html(posts):
           </button>
           <div class="nav-menu" id="nav-menu">
             <div class="nav-links">
-              <a href="#about" class="tl" data-ja="アバウト" data-en="About">About</a>
-              <a href="#tech" class="tl" data-ja="技術" data-en="Tech">Tech</a>
-              <a href="#works" class="tl" data-ja="ワークス" data-en="Works">Works</a>
-              <a href="blog/" class="tl" data-ja="ブログ" data-en="Blog">Blog</a>
+              <a href="../#about" class="tl" data-ja="アバウト" data-en="About">About</a>
+              <a href="../#tech" class="tl" data-ja="技術" data-en="Tech">Tech</a>
+              <a href="../#works" class="tl" data-ja="ワークス" data-en="Works">Works</a>
+              <a href="../blog/" class="tl" data-ja="ブログ" data-en="Blog">Blog</a>
             </div>
             <button class="lang-toggle" onclick="toggleLanguage()" aria-label="Toggle language">
               <span id="lang-ja">JA</span><span>/</span><span id="lang-en" class="active">EN</span>
