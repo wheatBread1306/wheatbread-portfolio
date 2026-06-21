@@ -6,7 +6,20 @@
     "enabled": true
   },
   "assets": {
-    "directory": "."
+    "directory": ".",
+    "exclude": [
+      "node_modules",
+      ".git",
+      ".github",
+      "wrangler.jsonc",
+      ".gitignore",
+      "posts/**",
+      "test/**",
+      "README.md",   
+      "*.py",
+      "FileDir.txt",
+      "LICENSE"
+    ]
   },
   "compatibility_flags": [
     "nodejs_compat"
