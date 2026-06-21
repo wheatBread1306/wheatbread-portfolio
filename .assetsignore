@@ -1,0 +1,10 @@
+.git/
+.github/
+wrangler.jsonc
+.gitignore
+posts/
+README.md
+build.py
+FileDir.txt
+LICENSE
+node_modules/

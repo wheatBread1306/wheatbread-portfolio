@@ -8,15 +8,13 @@
   "assets": {
     "directory": ".",
     "exclude": [
-      "node_modules",
       ".git",
       ".github",
       "wrangler.jsonc",
       ".gitignore",
       "posts/**",
-      "test/**",
       "README.md",   
-      "*.py",
+      "build.py",
       "FileDir.txt",
       "LICENSE"
     ]
