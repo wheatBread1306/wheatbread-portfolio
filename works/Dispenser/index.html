@@ -64,8 +64,8 @@
                     <a href="../../index.html#works" class="btn tl" data-ja="← ワークスへ戻る" data-en="← Back to Works">← Back
                         to
                         Works</a>
-                    <a href="https://github.com/wheatBread1306/Dispenser" target="_blank"
-                        rel="noopener noreferrer" class="btn btn-outline">
+                    <a href="https://github.com/wheatBread1306/Dispenser" target="_blank" rel="noopener noreferrer"
+                        class="btn btn-outline">
                         <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
                             <path
                                 d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
@@ -92,72 +92,96 @@
                     style="max-width: 50%; width: 100%; display: block; margin: 0 auto 2rem; border-radius: 12px;">
                 <h2 class="tl" data-ja="プロジェクト概要" data-en="Project Overview"
                     style="color: var(--text-main); margin-bottom: 1rem;">Project Overview</h2>
-                <p class="tl"
-                    data-ja="DeckFilter は、DJコントローラーに搭載されているフィルターの挙動を模したプラグインです。1つの大きなノブを回すだけで、直感的かつダイナミックなフィルタリング効果を得ることができます。"
-                    data-en="DeckFilter is a plugin that emulates the behavior of filters found on DJ controllers. By turning a single large knob, you can achieve intuitive and dynamic filtering effects."
-                    style="margin-bottom: 1.5rem;">DeckFilter is a plugin that emulates the behavior of filters found on
-                    DJ controllers. By turning a single large knob, you can achieve intuitive and dynamic filtering
-                    effects.</p>
+                <p class="tl" data-ja="DISPENSER は、SIMD最適化に重点を置いたKilohearts Disperserのクローンプラグインです。"
+                    data-en="DISPENSER is a clone plugin of Kilohearts Disperser that focuses on SIMD optimization."
+                    style="margin-bottom: 1.5rem;">DISPENSER is a clone plugin of Kilohearts Disperser that focuses on
+                    SIMD optimization.</p>
 
                 <h3 class="tl" data-ja="開発のきっかけ" data-en="Background"
                     style="color: var(--text-main); margin-bottom: 0.5rem; margin-top: 1.5rem; font-size: 1.25rem;">
                     Background</h3>
-                <p class="tl" data-ja="既存のDJフィルタープラグインの一部で、操作時にCPUのスパイク（負荷の急増）が発生するという声を耳にしたことが開発の第一の理由です。"
-                    data-en="The primary reason for development was hearing reports that some existing DJ filter plugins caused CPU spikes during operation."
-                    style="margin-bottom: 0.5rem;">The primary reason for development was hearing reports that some
-                    existing DJ filter plugins caused CPU spikes during operation.</p>
-                <p class="tl" data-ja="また、画面中央に巨大なノブを1つ配置した、非常にシンプルで大胆なデザインのプラグインを自分自身で作ってみたいという興味もあり、制作をスタートしました。"
-                    data-en="Additionally, I was interested in creating a plugin with a very simple and bold design, featuring just one massive knob in the center of the screen, which motivated me to start this project."
-                    style="margin-bottom: 1.5rem;">Additionally, I was interested in creating a plugin with a very
-                    simple and bold design, featuring just one massive knob in the center of the screen, which motivated
-                    me to start this project.</p>
+                <p class="tl" data-ja="後述するように、本来SIMD化がほぼ不可能であるIIRフィルタのSIMD化手法を思いついたので、試してみたいという理由で作りました。"
+                    data-en="As I will explain later, I built this because I came up with a method to apply SIMD (Single Instruction, Multiple Data) processing to IIR filters—something generally considered nearly impossible—and wanted to test it out."
+                    style="margin-bottom: 0.5rem;">As I will explain later, I built this because I came up with a method
+                    to apply SIMD (Single Instruction, Multiple Data) processing to IIR filters—something generally
+                    considered nearly impossible—and wanted to test it out.</p>
 
                 <h3 class="tl" data-ja="技術的な挑戦" data-en="Technical Challenges"
                     style="color: var(--text-main); margin-bottom: 0.5rem; margin-top: 1.5rem; font-size: 1.25rem;">
                     Technical Challenges</h3>
 
-                <h4 class="tl" data-ja="1. 自然なフィルター挙動の再現" data-en="1. Reproducing Natural Filter Behavior"
+                <h4 class="tl" data-ja="1. TPTを使用したState Variable Filterの実装"
+                    data-en="1. State Variable Filter implemented using Topology-Preserving Transform"
                     style="color: var(--text-main); margin-bottom: 0.5rem; margin-top: 1rem; font-size: 1.1rem;">1.
-                    Reproducing Natural Filter Behavior</h4>
+                    State Variable Filter implemented using Topology-Preserving Transform</h4>
                 <p class="tl"
-                    data-ja="DJコントローラーのフィルターを模するため、Frequency（カットオフ周波数）ノブの操作に合わせて内部で自動的にQ値（レゾナンス）が変化する仕組みを実装しました。"
-                    data-en="To emulate a DJ controller's filter, I implemented a mechanism where the Q-value (resonance) changes automatically internally in tandem with the operation of the Frequency (cutoff) knob."
-                    style="margin-bottom: 0.5rem;">To emulate a DJ controller's filter, I implemented a mechanism where
-                    the Q-value (resonance) changes automatically internally in tandem with the operation of the
-                    Frequency (cutoff) knob.</p>
-                <p class="tl" data-ja="しかし、単に数値を連動させるだけでは音楽的で自然な変化にならず、聴感上心地よい「自然な設定値（カーブ）」を探り当てるための微調整に非常に苦労しました。"
-                    data-en="However, simply linking the values didn't result in a musical and natural variation. It took a lot of struggle and fine-tuning to find the 'natural settings (curve)' that felt pleasing to the ear."
-                    style="margin-bottom: 1.5rem;">However, simply linking the values didn't result in a musical and
-                    natural variation. It took a lot of struggle and fine-tuning to find the 'natural settings (curve)'
-                    that felt pleasing to the ear.</p>
+                    data-ja="従来のBiquadフィルタで発生する変調時の不調和音や不自然な音量変化を回避するため、台形積分を用いたTPT（位相保存変換）による構造を実装しました。これにより、遅延なしフィードバックループ（Zero-Delay Feedback）を代数的に解決しています。"
+                    data-en="To avoid audio artifacts and unnatural gain fluctuations during modulation in conventional Biquad filters, I implemented an SVF architecture using Topology-Preserving Transform (TPT) with trapezoidal integration, algebraically resolving the zero-delay feedback loop."
+                    style="margin-bottom: 0.5rem;">To avoid audio artifacts and unnatural gain fluctuations during
+                    modulation in conventional Biquad filters, I implemented an SVF architecture using
+                    Topology-Preserving Transform (TPT) with trapezoidal integration, algebraically resolving the
+                    zero-delay feedback loop.</p>
+                <p class="tl"
+                    data-ja="カットオフ周波数を激しく動かしてもフラットな全帯域の振幅特性（オールパス特性）と安定性を完全に維持し、音切れのないスムーズな位相変調とアナログライクで音楽的な応答を実現しました。"
+                    data-en="This maintained a perfectly flat amplitude response and rock-solid stability even during aggressive cutoff frequency sweeps, achieving seamless phase modulation and an authentic, musical analog response."
+                    style="margin-bottom: 1.5rem;">This maintained a perfectly flat amplitude response and rock-solid
+                    stability even during aggressive cutoff frequency sweeps, achieving seamless phase modulation and an
+                    authentic, musical analog response.</p>
 
-                <h4 class="tl" data-ja="2. 巨大なノブのUIデザイン" data-en="2. UI Design of the Giant Knob"
-                    style="color: var(--text-main); margin-bottom: 0.5rem; margin-top: 1rem; font-size: 1.1rem;">2. UI
-                    Design of the Giant Knob</h4>
-                <p class="tl" data-ja="直感的な操作性を強調するため、画面中央に非常に巨大なノブを配置するレイアウトを採用しました。"
-                    data-en="To emphasize intuitive operability, I adopted a layout that places a massive knob right in the center of the screen."
-                    style="margin-bottom: 0.5rem;">To emphasize intuitive operability, I adopted a layout that places a
-                    massive knob right in the center of the screen.</p>
-                <p class="tl" data-ja="これほど大きく表示してもグラフィックとして間延びせず、違和感のないデザインに仕上げるため、質感や影の落とし方などの細部の調整に苦心しました。"
-                    data-en="It was a challenge to adjust the details, such as textures and drop shadows, to create a design that didn't look overly stretched or unnatural even when displayed at such a large size."
-                    style="margin-bottom: 1.5rem;">It was a challenge to adjust the details, such as textures and drop
-                    shadows, to create a design that didn't look overly stretched or unnatural even when displayed at
-                    such a large size.</p>
+                <h4 class="tl" data-ja="2. TPT SVFの実装とAVX2 SIMDによる高度な並列処理構造"
+                    data-en="2. TPT SVF Implementation & Advanced AVX2 SIMD Parallelization"
+                    style="color: var(--text-main); margin-bottom: 0.5rem; margin-top: 1rem; font-size: 1.1rem;">2.
+                    TPT SVF Implementation & Advanced AVX2 SIMD Parallelization</h4>
+                <p class="tl"
+                    data-ja="IIRフィルターの構造上、過去の出力に依存するため時間軸方向での並列化ができません。また、L/Rチャンネル並列化は非インターリーブ構造のメモリ配置においてスキャター命令（AVX2非対応）が必要となり効率的ではないため、本実装ではSIMD（YMMレジスタ: float×8）を活用し、サンプルを1つずつずらして8つのフィルターを空間的に並列演算する独自構造を構築しました。"
+                    data-en="Due to the nature of IIR filters, time-domain parallelization is impossible owing to state feedback. Additionally, L/R channel parallelization is inefficient for non-interleaved memory because AVX2 lacks scatter instructions. To address this, I designed a spatial parallelization structure using AVX2 SIMD (256-bit YMM registers holding 8 floats), computing 8 filter states concurrently by shifting samples across the vector lane."
+                    style="margin-bottom: 0.5rem;">Due to the nature of IIR filters, time-domain parallelization is
+                    impossible owing to state feedback. Additionally, L/R channel parallelization is inefficient for
+                    non-interleaved memory because AVX2 lacks scatter instructions. To address this, I designed a
+                    spatial parallelization structure using AVX2 SIMD (256-bit YMM registers holding 8 floats),
+                    computing 8 filter states concurrently by shifting samples across the vector lane.</p>
+                <p class="tl"
+                    data-ja="この最適化により、ナイーブに8つのフィルターを処理する場合と比較して圧勝的な処理速度を実現しました。結果として、8並列ユニットを8段直列接続した合計64基のフィルター（オールパス）処理においても、極めて低いCPU負荷でのリアルタイム処理を可能にしました。"
+                    data-en="This optimization achieved dramatically superior performance compared to a naive 8-filter execution. As a result, even a cascade of 8 parallel units—effectively executing 64 active filter states—runs with minimal CPU overhead in real time."
+                    style="margin-bottom: 1.5rem;">This optimization achieved dramatically superior performance compared
+                    to a naive 8-filter execution. As a result, even a cascade of 8 parallel units—effectively executing
+                    64 active filter states—runs with minimal CPU overhead in real time.</p>
 
-                <h4 class="tl" data-ja="3. 機能性と見た目を両立させるメーター配置"
-                    data-en="3. Meter Placement Balancing Functionality and Aesthetics"
+                <h4 class="tl" data-ja="3. 独自パラメータ「Drift」によるLR非相関ステレオ効果"
+                    data-en="3. Stereo Uncorrelation via Proprietary 'Drift' Parameter"
                     style="color: var(--text-main); margin-bottom: 0.5rem; margin-top: 1rem; font-size: 1.1rem;">3.
-                    Meter Placement Balancing Functionality and Aesthetics</h4>
-                <p class="tl" data-ja="Colorノブとロゴセクションの間に、不自然な空白スペースが生まれてしまいました。"
-                    data-en="An unnatural empty space was created between the Color knob and the logo section."
-                    style="margin-bottom: 0.5rem;">An unnatural empty space was created between the Color knob and the
-                    logo section.</p>
+                    Stereo Uncorrelation via Proprietary 'Drift' Parameter</h4>
                 <p class="tl"
-                    data-ja="そこで、このデッドスペースにオーディオメーターを搭載することで、プラグインとしての機能性を向上させつつ、全体的な見た目のバランスを自然に整えるという工夫を凝らしました。"
-                    data-en="To solve this, I added audio meters in these dead spaces. This ingenuity not only improved the functionality of the plugin but also naturally balanced the overall visual appearance."
-                    style="margin-bottom: 1.5rem;">To solve this, I added audio meters in these dead spaces. This
-                    ingenuity not only improved the functionality of the plugin but also naturally balanced the overall
-                    visual appearance.</p>
+                    data-ja="独自の「Drift」パラメータを導入し、フィルターのカットオフ周波数を動的に変化させる機能を拡張しました。左右チャンネル（L/R）それぞれに独立した変化率テーブルを持たせることで、左右の位相や周波数応答の相関を崩し（非相関化）、自然で広がりのある独特なステレオ感を創出しています。"
+                    data-en="I expanded the system by introducing a proprietary 'Drift' parameter that dynamically modulates the filter's cutoff frequency. By employing separate rate lookup tables for the left and right channels, I created spatial uncorrelation between L/R phase and frequency responses, resulting in a unique and organic stereo width."
+                    style="margin-bottom: 0.5rem;">I expanded the system by introducing a proprietary 'Drift' parameter
+                    that dynamically modulates the filter's cutoff frequency. By employing separate rate lookup tables
+                    for the left and right channels, I created spatial uncorrelation between L/R phase and frequency
+                    responses, resulting in a unique and organic stereo width.</p>
+                <p class="tl"
+                    data-ja="また、LとRでそれぞれ8つのフィルター状態を常時保持している構造を活用し、8個分のフィルター係数計算も一度にまとめて並列実行できるように設計しました。これにより、複雑なステレオ変調処理を極めて低い演算コストで実現しています。"
+                    data-en="Furthermore, leveraging the architecture that maintains 8 active filter states individually for both L and R channels, the coefficient calculations for all 8 filters are computed concurrently in a single batch. This achieves complex stereo modulation with minimal computational overhead."
+                    style="margin-bottom: 1.5rem;">Furthermore, leveraging the architecture that maintains 8 active
+                    filter states individually for both L and R channels, the coefficient calculations for all 8 filters
+                    are computed concurrently in a single batch. This achieves complex stereo modulation with minimal
+                    computational overhead.</p>
+
+                <h4 class="tl" data-ja="4. サンプル単位の係数スムージングによるノイズ低減"
+                    data-en="4. Per-Sample Coefficient Smoothing for Artifact Reduction"
+                    style="color: var(--text-main); margin-bottom: 0.5rem; margin-top: 1rem; font-size: 1.1rem;">4.
+                    Per-Sample Coefficient Smoothing for Artifact Reduction</h4>
+                <p class="tl"
+                    data-ja="オートメーションやDrift機能によってカットオフ周波数などのパラメータが変動する際、不連続な値の変化によって不快なクリックノイズやジッパーノイズが発生するという課題がありました。"
+                    data-en="When parameters such as cutoff frequency change via automation or the Drift feature, discontinuous value updates can introduce unpleasant click or zipper noise."
+                    style="margin-bottom: 0.5rem;">When parameters such as cutoff frequency change via automation or the
+                    Drift feature, discontinuous value updates can introduce unpleasant click or zipper noise.</p>
+                <p class="tl"
+                    data-ja="本実装では、ブロック単位ではなくサンプルごとにフィルタ係数を補間・再計算するスムージング処理を組み込みました。パラメータの激しい変動時でも音切れやステップノイズを完全に抑制し、極めて滑らかでクリーンな音質変化を実現しています。"
+                    data-en="To solve this, I incorporated a per-sample coefficient smoothing mechanism that interpolates and recalculates filter parameters at every sample. This completely eliminates audio drops and step artifacts during rapid parameter sweeps, ensuring ultra-smooth, pristine audio transitions."
+                    style="margin-bottom: 1.5rem;">To solve this, I incorporated a per-sample coefficient smoothing
+                    mechanism that interpolates and recalculates filter parameters at every sample. This completely
+                    eliminates audio drops and step artifacts during rapid parameter sweeps, ensuring ultra-smooth,
+                    pristine audio transitions.</p>
             </div>
         </section>
     </main>
