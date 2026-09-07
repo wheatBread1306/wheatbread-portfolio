@@ -182,6 +182,64 @@
                     mechanism that interpolates and recalculates filter parameters at every sample. This completely
                     eliminates audio drops and step artifacts during rapid parameter sweeps, ensuring ultra-smooth,
                     pristine audio transitions.</p>
+
+                <h4 class="tl" data-ja="5. イントリンシックを排した「コンパイラ主導」のフルベクタライズ設計"
+                    data-en="5. Compiler-Driven Full Vectorization: Beyond Manual Intrinsics"
+                    style="color: var(--text-main); margin-bottom: 0.5rem; margin-top: 1rem; font-size: 1.1rem;">5.
+                    Compiler-Driven Full Vectorization: Beyond Manual Intrinsics</h4>
+
+                <p class="tl"
+                    data-ja="本プロジェクトでは、SIMD化において一般的な手動のイントリンシック命令記述をあえて行わず、コンパイラの最適化能力を100%引き出すことでフルベクタライズを実現する手法を採りました。これには、コンパイラがベクタライズを諦める理由をコードから徹底的に排除する構造設計が求められます。"
+                    data-en="In this project, I intentionally avoided manual SIMD intrinsics, instead opting for a strategy that achieves full vectorization by maximizing the compiler's optimization capacity. This required an architectural design to systematically eliminate every reason a compiler might 'give up' on vectorization."
+                    style="margin-bottom: 0.5rem;">In this project, I intentionally avoided manual SIMD intrinsics,
+                    instead opting for a strategy that achieves full vectorization by maximizing the compiler's
+                    optimization capacity. This required an architectural design to systematically
+                    eliminate every reason a compiler might 'give up' on vectorization.</p>
+
+                <p class="tl"
+                    data-ja="まず、ループ構造の最適化として、係数計算、レジスタの数値シフト、フィルタ本体の演算を一つの巨大なループにまとめず、それぞれ独立したループとして記述しました。ループ内が複雑になりすぎるとコンパイラは解析を断念し、安全のためにスカラ命令を生成してしまいます。処理を分割することで、コンパイラは各ループに対して最適なアンロールとベクトル化を適用でき、レジスタの再利用効率も最大化されます。"
+                    data-en="First, to optimize loop structures, I decoupled coefficient calculations, register shifting, and core filter computations into distinct loops rather than merging them into a single monolithic loop. When a loop body becomes too complex, compilers often revert to scalar instructions for safety. By isolating these processes, the compiler can apply optimal unrolling and vectorization to each segment, maximizing register reuse efficiency."
+                    style="margin-bottom: 0.5rem;">First, to optimize loop structures, I decoupled coefficient
+                    calculations, register shifting, and core filter computations into distinct loops rather than
+                    merging them into a single monolithic loop. When a loop body becomes too complex, compilers often
+                    revert to scalar instructions for safety. By isolating these processes, the compiler can apply
+                    optimal unrolling and vectorization to each segment, maximizing register reuse efficiency.</p>
+
+                <p class="tl"
+                    data-ja="また、静的解析におけるエイリアスの疑いを完全に排除しました。できる限り変数をローカルで宣言し、ポインタ演算によるメンバ変数へのアクセスやゲッター関数を排除することで、メモリ上のデータ重複（エイリアシング）が発生しないことをコンパイラに保証しました。これにより、コンパイラはメモリアクセスを投機的に並べ替えることが可能になり、SIMD命令のパイプラインを可能な限りフルで利用するアセンブリが生成されます。"
+                    data-en="Furthermore, I focused on eliminating 'alias ambiguity' during static analysis. By declaring variables locally whenever possible and avoiding pointer-based member access or getter functions, I guaranteed to the compiler that memory regions do not overlap (aliasing). This certainty allows the compiler to speculatively reorder memory accesses, generating assembly that fully saturates the SIMD instruction pipeline."
+                    style="margin-bottom: 0.5rem;">Furthermore, I focused on eliminating 'alias ambiguity' during static
+                    analysis. By declaring variables locally whenever possible and avoiding pointer-based member access
+                    or getter functions, I guaranteed to the compiler that memory regions do not overlap (aliasing).
+                    This certainty allows the compiler to speculatively reorder memory accesses, generating assembly
+                    that fully saturates the SIMD instruction pipeline.</p>
+
+                <p class="tl"
+                    data-ja="データ構造には、独自ラッパーではなく `std::array<float, 8>` を採用しました。標準コンテナはコンパイラにとって最も理解しやすく、生配列に比べポインタへの降格（Decay）による不要なメモリ書き込みを抑制できるため、実質的にYMMレジスタの抽象型として機能します。ここに `std::clamp` によるブランチレス演算や、SIMD命令セットに直結する `fast_exp2` のインライン化を組み合わせることで、論理分岐によるパイプラインのストールを最小限に抑えています。"
+                    data-en="For data structures, I utilized `std::array<float, 8>` instead of custom SIMD wrappers. Standard containers are more transparent to modern compilers and help prevent unnecessary memory writes caused by pointer decay, effectively serving as an abstraction for YMM registers. Combining this with branchless arithmetic via `std::clamp` and inlined SIMD-friendly `fast_exp2`, I minimized pipeline stalls caused by logical branching."
+                    style="margin-bottom: 0.5rem;">For data structures, I utilized `std::array<float, 8>` instead of
+                        custom SIMD wrappers. Standard containers are more transparent to modern compilers and help
+                        prevent unnecessary memory writes caused by pointer decay, effectively serving as an abstraction
+                        for YMM registers. Combining this with branchless arithmetic via `std::clamp` and inlined
+                        SIMD-friendly `fast_exp2`, I minimized pipeline stalls caused by logical branching.</p>
+
+                <p class="tl"
+                    data-ja="手動イントリンシックを避けた最大の理由は、コンパイラの方が各アーキテクチャの命令スループットやレイテンシ、最適な命令順序（スケジューリング）を正確に把握しているからです。人間が書くイントリンシックは逐次的になりがちですが、コンパイラは数式的に等価な範囲で命令をシャッフルし、人間には非直感的ですが極めて高速な実行コードを生成します。例えば、`hadd` のような専用命令よりも、複数のSIMD命令を組み合わせた方が速いケースなどもコンパイラは自動で判断します。"
+                    data-en="The primary reason for avoiding manual intrinsics is that modern compilers possess a superior understanding of instruction throughput, latency, and optimal scheduling for specific architectures. While human-written intrinsics tend to be sequential, a compiler can shuffle instructions—often in non-intuitive ways—to produce mathematically equivalent yet significantly faster machine code. For instance, the compiler can automatically decide whether to use a dedicated instruction like `hadd` or a faster sequence of primitive SIMD operations."
+                    style="margin-bottom: 0.5rem;">The primary reason for avoiding manual intrinsics is that modern
+                    compilers possess a superior understanding of instruction throughput, latency, and optimal
+                    scheduling for specific architectures. While human-written intrinsics tend to be sequential, a
+                    compiler can shuffle instructions—often in non-intuitive ways—to produce mathematically equivalent
+                    yet significantly faster machine code. For instance, the compiler can automatically decide whether
+                    to use a dedicated instruction like `hadd` or a faster sequence of primitive SIMD operations.</p>
+
+                <p class="tl"
+                    data-ja="その結果、ClangやGCCにおいて極めて高度にベクトル化されたバイナリが得られました（※アルゴリズムの性質上、入出力バッファの読み書きとレジスタシフトのみスカラ処理となります）。この設計により、将来的な命令セットの拡張にも柔軟に対応しつつ、手動最適化を超えるパフォーマンスを実現しています。"
+                    data-en="As a result, the project achieved highly vectorized binaries on Clang and GCC (note: due to algorithmic constraints, only buffer I/O and register shifts remain scalar). This design ensures flexibility for future instruction set extensions while delivering performance that often surpasses manual optimization."
+                    style="margin-bottom: 1.5rem;">As a result, the project achieved highly vectorized binaries on Clang
+                    and GCC (note: due to algorithmic constraints, only buffer I/O and register shifts remain scalar).
+                    This design ensures flexibility for future instruction set extensions while delivering performance
+                    that often surpasses manual optimization.</p>
             </div>
         </section>
     </main>
