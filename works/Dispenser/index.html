@@ -234,10 +234,9 @@
                     to use a dedicated instruction like `hadd` or a faster sequence of primitive SIMD operations.</p>
 
                 <p class="tl"
-                    data-ja="その結果、ClangやGCCにおいて極めて高度にベクトル化されたバイナリが得られました（※アルゴリズムの性質上、入出力バッファの読み書きとレジスタシフトのみスカラ処理となります）。この設計により、将来的な命令セットの拡張にも柔軟に対応しつつ、手動最適化を超えるパフォーマンスを実現しています。"
-                    data-en="As a result, the project achieved highly vectorized binaries on Clang and GCC (note: due to algorithmic constraints, only buffer I/O and register shifts remain scalar). This design ensures flexibility for future instruction set extensions while delivering performance that often surpasses manual optimization."
-                    style="margin-bottom: 1.5rem;">As a result, the project achieved highly vectorized binaries on Clang
-                    and GCC (note: due to algorithmic constraints, only buffer I/O and register shifts remain scalar).
+                    data-ja="その結果、ClangやGCCにおいて極めて高度にベクトル化されたバイナリが得られました（注: アルゴリズム上の制約によりバッファI/Oとレジスタシフトのみスカラー処理として残りますが、私の環境ではコンパイラの命令スケジューリングとOut-of-Order（OoO）実行により、そのレイテンシは前後のFMA命令に隠蔽されます）。この設計により、将来的な命令セットの拡張にも柔軟に対応しつつ、手動最適化を超えるパフォーマンスを実現しています。"
+                    data-en="As a result, the project achieved highly vectorized binaries on Clang and GCC (note: due to algorithmic constraints, only buffer I/O and register shifts remain scalar, though their latency is hidden behind surrounding FMA instructions via compiler instruction scheduling and out-of-order execution in my environment). This design ensures flexibility for future instruction set extensions while delivering performance that often surpasses manual optimization."
+                    style="margin-bottom: 1.5rem;">As a result, the project achieved highly vectorized binaries on Clang and GCC (note: due to algorithmic constraints, only buffer I/O and register shifts remain scalar, though their latency is hidden behind surrounding FMA instructions via compiler instruction scheduling and out-of-order execution in my environment).
                     This design ensures flexibility for future instruction set extensions while delivering performance
                     that often surpasses manual optimization.</p>
             </div>
