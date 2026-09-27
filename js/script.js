@@ -148,14 +148,58 @@ function initWaveAnimation() {
   
   window.addEventListener('resize', resize);
   resize();
-  
+
+  let animationFrameId = null;
+  let isCanvasVisible = !document.hidden;
+
   function animate() {
+    animationFrameId = null;
+
+    if (!isCanvasVisible || document.hidden) {
+      return;
+    }
+
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     waves.forEach(wave => wave.draw());
-    requestAnimationFrame(animate);
+    animationFrameId = requestAnimationFrame(animate);
   }
-  
-  animate();
+
+  function startAnimation() {
+    if (animationFrameId === null && isCanvasVisible && !document.hidden) {
+      animationFrameId = requestAnimationFrame(animate);
+    }
+  }
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      isCanvasVisible = false;
+      if (animationFrameId !== null) {
+        cancelAnimationFrame(animationFrameId);
+        animationFrameId = null;
+      }
+      return;
+    }
+
+    isCanvasVisible = true;
+    startAnimation();
+  });
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(([entry]) => {
+      isCanvasVisible = entry.isIntersecting;
+
+      if (!isCanvasVisible && animationFrameId !== null) {
+        cancelAnimationFrame(animationFrameId);
+        animationFrameId = null;
+      } else {
+        startAnimation();
+      }
+    });
+
+    observer.observe(canvas);
+  }
+
+  startAnimation();
 }
 
 document.addEventListener('DOMContentLoaded', () => {
