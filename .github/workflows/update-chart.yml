@@ -20,7 +20,7 @@ jobs:
 
       - name: Download contribution SVG
         run: |
-          curl -s "https://ghchart.rschio.com/wheatBread1306" -o assets/github-chart.svg
+          curl -s "https://ghchart.rshah.org/wheatBread1306" -o assets/github-chart.svg
 
       - name: Commit and push if changed
         run: |
