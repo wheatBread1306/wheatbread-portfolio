@@ -3,11 +3,12 @@
   --bg-color: #0d1117;
   --text-main: #e6edf3;
   --text-muted: #8b949e;
-  --accent: #2f81f7; /* Primary Accent Blue */
+  --accent: #2f81f7;
+  /* Primary Accent Blue */
   --accent-hover: #58a6ff;
   --card-bg: #161b22;
   --border-color: #30363d;
-  
+
   /* Utilities */
   --transition: all 0.3s ease;
   --header-height: 70px;
@@ -40,7 +41,9 @@ html {
 }
 
 /* Typography */
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   font-weight: 700;
   line-height: 1.2;
   color: var(--text-main);
@@ -339,6 +342,7 @@ section {
 .about {
   background-color: var(--card-bg);
 }
+
 .about-content {
   max-width: 700px;
   margin: 0 auto;
@@ -448,11 +452,11 @@ section {
   transition: var(--transition);
   display: flex;
   flex-direction: column;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 .card:hover {
-  box-shadow: 0 20px 25px -5px rgba(0,0,0,0.05), 0 10px 10px -5px rgba(0,0,0,0.02);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
   transform: translateY(-4px);
   border-color: transparent;
 }
@@ -512,9 +516,14 @@ section {
   color: var(--accent);
 }
 
-.activity-graph {
-  display: flex;
-  justify-content: center;
+.activity-graph img {
+  filter: invert(0.95) hue-rotate(180deg);
+  border-radius: 8px;
+  width: 100%;
+  max-width: 850px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
 }
 
 /* Footer */
@@ -530,16 +539,20 @@ footer {
   .hero h1 {
     font-size: 2.5rem;
   }
+
   section {
     padding: 5rem 0;
   }
+
   .nav-group {
     gap: 0;
     position: relative;
   }
+
   .menu-toggle {
     display: inline-flex;
   }
+
   .nav-menu {
     position: absolute;
     top: calc(100% + 0.75rem);
@@ -555,20 +568,25 @@ footer {
     border-radius: 12px;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
   }
+
   .nav-menu.open {
     display: flex;
   }
+
   .nav-menu .nav-links {
     flex-direction: column;
     gap: 0.75rem;
   }
+
   .nav-menu .nav-links a {
     font-size: 1rem;
   }
+
   .nav-menu .lang-toggle {
     width: 100%;
     justify-content: center;
   }
+
   .container {
     padding: 0 1.5rem;
   }
