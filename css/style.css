@@ -512,6 +512,11 @@ section {
   color: var(--accent);
 }
 
+.activity-graph {
+  display: flex;
+  justify-content: center;
+}
+
 /* Footer */
 footer {
   text-align: center;
